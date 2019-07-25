@@ -24,6 +24,7 @@ class RegisterForm extends Component {
       <div>
       <AppBar
          title="Register"
+         showMenuIconButton={false}
        />
     <form name="loginForm" onSubmit={this.onSubmit}>
             <TextField

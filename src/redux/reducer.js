@@ -4,6 +4,7 @@ const SET_LOGIN_ERROR = 'SET_LOGIN_ERROR';
 const SET_REGISTER_PENDING = 'SET_REGISTER_PENDING';
 const SET_REGISTER_SUCCESS = 'SET_REGISTER_SUCCESS';
 const SET_REGISTER_ERROR = 'SET_REGISTER_ERROR';
+const LOG_OUT = 'LOG_OUT';
 
 export function login(email, password , userPass) {
   return dispatch => {
@@ -19,6 +20,12 @@ export function login(email, password , userPass) {
         dispatch(setLoginError(error));
       }
     });
+  }
+}
+
+export function logout() {
+  return dispatch => {
+    dispatch(refreshlog(true));
   }
 }
 
@@ -81,6 +88,14 @@ function setregistorError(registorError) {
   }
 }
 
+function refreshlog(logOut)
+{
+  return{
+    type:LOG_OUT,
+    logOut
+  }
+}
+
 function callLoginApi(email, password, userPass, callback) {
   setTimeout(() => {
     if (userPass) {
@@ -137,6 +152,15 @@ export default function reducer(state = {
       case SET_REGISTER_ERROR:
         return Object.assign({}, state, {
           registorError: action.registorError
+        });
+        case LOG_OUT:
+        return Object.assign({}, state, {
+          isLoginSuccess: false,
+          isLoginPending: false,
+          loginError: null,
+          isRegisterSuccess:false,
+          isRegisterPending:false,
+          registorError:null
         });
     default:
       return state;

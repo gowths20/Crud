@@ -12,6 +12,12 @@ class LoginForm extends Component {
 
   constructor(props) {
     super(props);
+    
+      if(!this.props.isRegisterSuccess)
+      {
+        this.props.history.push('/')
+      }
+    console.log(this.props)
     this.state = {registred:false};
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -24,6 +30,7 @@ class LoginForm extends Component {
       <div>
       <AppBar
          title="Login"
+         showMenuIconButton={false}
        />
     <form name="loginForm" onSubmit={this.onSubmit}>
             <TextField
@@ -88,7 +95,10 @@ const mapStateToProps = (state) => {
   return {
     isLoginPending: state.isLoginPending,
     isLoginSuccess: state.isLoginSuccess,
-    loginError: state.loginError
+    loginError: state.loginError,
+    isRegisterSuccess:state.isRegisterSuccess,
+    isRegisterPending:state.isRegisterPending,
+    registerError:state.registerError
   };
 }
 

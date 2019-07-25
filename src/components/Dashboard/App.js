@@ -1,15 +1,42 @@
 import React , { Component } from 'react';
 import MaterialTable from 'material-table';
+import { connect } from 'react-redux';
+import { logout } from '../../redux/reducer';
 import {serviceCal} from '../../service/service';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Button from '@material-ui/core/Button';
 class App extends Component {
   
-  constructor()
+  constructor(props)
   {
-    super();
+    super(props);
+    console.log(this.props)
+    if(this.props.isRegisterSuccess)
+    {
+      if(this.props.isLoginSuccess)
+      {
+
+      }
+      else
+      {
+        this.props.history.push('/home');
+      }
+    }
+    else
+    {
+      this.props.history.push('/');
+      
+    }
     this.state = {
       registered:false
     }  
+    this.LogOut = this.logout.bind(this);
+  }
+  logout()
+  {
+    this.props.dispatch(logout());
+    this.props.history.push('/');
   }
   componentDidMount() {
     console.log(serviceCal)
@@ -25,7 +52,7 @@ class App extends Component {
   {
     
     return(
-      this.state.registered?<MaterialTableDemo model = {this.data} />:null
+      this.state.registered?<MuiThemeProvider><AppBar showMenuIconButton={false} title = "DashBoard"><Button onClick = {this.LogOut} color="inherit">Logout</Button></AppBar><MaterialTableDemo model = {this.data} /></MuiThemeProvider>:null
     )
   }
 }
@@ -43,7 +70,7 @@ function MaterialTableDemo(props) {
 
   return (
     <MaterialTable
-      title="Editable Example"
+      title="Employee Record"
       columns={state.columns}
       data={state.data}
       editable={{
@@ -78,4 +105,15 @@ function MaterialTableDemo(props) {
     />
   );
 }
-export default App
+const mapStateToProps = (state) => {
+  return {
+    isLoginPending: state.isLoginPending,
+    isLoginSuccess: state.isLoginSuccess,
+    loginError: state.loginError,
+    isRegisterSuccess:state.isRegisterSuccess,
+    isRegisterPending:state.isRegisterPending,
+    registerError:state.registerError
+  };
+}
+
+export default connect(mapStateToProps)(App)
