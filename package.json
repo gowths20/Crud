@@ -1,0 +1,48 @@
+{
+  "name": "sample",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://github.com/gowths20/Crud",
+  "dependencies": {
+    "@material-ui/core": "^4.2.1",
+    "axios": "^0.19.0",
+    "gh-pages": "^2.0.1",
+    "git": "^0.1.5",
+    "immutable": "^4.0.0-rc.12",
+    "material-table": "^1.40.1",
+    "material-ui": "^0.20.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.0.1",
+    "react-tap-event-plugin": "^3.0.3",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+   "deploy": "gh-pages -d build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
